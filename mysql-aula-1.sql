@@ -25,7 +25,7 @@ INSERT INTO `aluno`(`nome`, `estadoCivil`, `sexo`) VALUES ('Vinícius', 'namorand
 INSERT INTO `aluno`(`nome`, `estadoCivil`, `sexo`) VALUES ('Sílvia', 'namorando', 'fem');
 
 -- Inserindo registro na tabela aluno
-INSERT INTO `aluno`(`nome`, `estadoCivil`, `sexo`) VALUES ('Paulino gogó', 'chegando aí', 'masc');
+INSERT INTO `aluno`(`nome`, `estadoCivil`, `sexo`) VALUES ('Paulinho gogó', 'chegando aí', 'masc');
 
 -- Selecionando apenas os alunos do sexo masculino
 SELECT `nome` FROM `aluno` WHERE sexo = 'masc';
