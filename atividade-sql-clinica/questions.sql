@@ -83,18 +83,33 @@
 
 -- 6.  Qual a média de idade dos médicos e o total de ambulatórios atendidos por eles?
 
-    SELECT AVG(`idade`) AS `media_da_idade_dos_medicos`, COUNT(DISTINCT `idAmbulatorio`) FROM `medico`;
+    SELECT AVG(`idade`) AS `media_da_idade_dos_medicos`, COUNT(DISTINCT `idAmbulatorio`) AS `total_de_ambulatorios` FROM `medico`;
 
     /* O resultado deve ser algo parecido com isso:
 
-        +----------------------------+---------------------------------+
-        | media_da_idade_dos_medicos | COUNT(DISTINCT `idAmbulatorio`) |
-        +----------------------------+---------------------------------+
-        |                    38.8750 |                               5 |
-        +----------------------------+---------------------------------+
+        +----------------------------+-----------------------+
+        | media_da_idade_dos_medicos | total_de_ambulatorios |
+        +----------------------------+-----------------------+
+        |                    38.8750 |                     5 |
+        +----------------------------+-----------------------+
     */
 
 -- 7.  Buscar o código, o nome e o salário líquido dos funcionários. O salário líquido é obtido pela diferença entre o salário cadastrado menos 20% deste mesmo salário
+
+    SELECT `idFuncionario` AS `codigo`, `nome`, (`salario` - (`salario` / 100 * 20)) AS `salario_liquido` FROM `funcionario`;
+
+    /* O resultado deve ser algo parecido com isso:
+        +--------+---------------+-----------------+
+        | codigo | nome          | salario_liquido |
+        +--------+---------------+-----------------+
+        |      1 | Rita Kadilac  |        960.0000 |
+        |      2 | Maria Bonita  |       1056.0000 |
+        |      3 | Caio Pereira  |        988.0000 |
+        |      4 | Carlos Lucena |        960.0000 |
+        |      5 | Juliana Paes  |       4400.0000 |
+        +--------+---------------+-----------------+
+    */
+
 -- 8.  Buscar o nome dos funcionários que terminam com a letra “a”;
 -- 9.  Buscar o nome e a especialidade dos médicos cujo nome comecem com a letra M;
 -- 10. Buscar os nomes dos pacientes com mais de 25 anos que estão com fratura e gripe.
