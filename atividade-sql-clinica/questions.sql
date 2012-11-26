@@ -110,7 +110,54 @@
         +--------+---------------+-----------------+
     */
 
+
 -- 8.  Buscar o nome dos funcionários que terminam com a letra “a”;
+
+    SELECT `nome` FROM `funcionario` WHERE `nome` LIKE '%a';
+
+    /* O resultado deve ser algo parecido com isso:
+       +---------------+
+       | nome          |
+       +---------------+
+       | Maria Bonita  |
+       | Caio Pereira  |
+       | Carlos Lucena |
+       +---------------+
+    */
+
+
 -- 9.  Buscar o nome e a especialidade dos médicos cujo nome comecem com a letra M;
+
+    SELECT `nome`, `especialidade` FROM `medico` WHERE `nome` LIKE 'M%';
+
+    /* O resultado deve ser algo parecido com isso:
+        +---------------+---------------+
+        | nome          | especialidade |
+        +---------------+---------------+
+        | Marco Aurelio | Obstetricia   |
+        | Maria         | Traumatologia |
+        | Marcia        | Neurologia    |
+        +---------------+---------------+
+    */
+
+
 -- 10. Buscar os nomes dos pacientes com mais de 25 anos que estão com fratura e gripe.
+
+
+    /* Considerando que a questão esteja pedindo os pacientes que tem "fratura" OU "gripe": */
+
+    SELECT `nome` FROM `paciente` P
+    LEFT JOIN `consulta` C ON C.idPaciente = P.idPaciente
+    WHERE (C.doenca like 'fratura%' OR C.doenca like '%gripe%') AND P.idade > 25;
+
+    /* O resultado deve ser algo parecido com isso:
+        +-------------+
+        | nome        |
+        +-------------+
+        | Carlos José |
+        | Carlos José |
+        +-------------+
+    */
+
+
 -- 11. Crie uma tabela temporária chamada atendimentos do tipo memory que contenha os seguintes dados: nome do médico, nome do paciente, doença e a data de atendimento.
