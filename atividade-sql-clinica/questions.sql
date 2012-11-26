@@ -161,3 +161,39 @@
 
 
 -- 11. Crie uma tabela temporária chamada atendimentos do tipo memory que contenha os seguintes dados: nome do médico, nome do paciente, doença e a data de atendimento.
+
+    CREATE TABLE `atendimentos` ENGINE=MEMORY
+        SELECT `M`.`nome` AS `nome_do_medico`, `P`.`nome` AS `nome_do_paciente`, `C`.`doenca`, `C`.`data` FROM `consulta` C
+        LEFT JOIN `medico` `M` ON `M`.`idMedico` = `C`.`idMedico`
+        LEFT JOIN `paciente` `P` ON `P`.`idPaciente` = `C`.`idPaciente`;
+
+     /* O retorno da query deve ser algo parecido com isso:
+
+     Query OK, 12 rows affected (0.09 sec)
+     Records: 12  Duplicates: 0  Warnings: 0
+
+     ------------------------------------------------------------------------------
+
+     Confirmando a execução da query (de criação da tabela), efetuamos um SELECT *...
+
+     SELECT * FROM `atendimentos`;
+
+     O resultado deve ser algo parecido com isso:
+
+         +----------------+------------------+---------------+------------+
+         | nome_do_medico | nome_do_paciente | doenca        | data       |
+         +----------------+------------------+---------------+------------+
+         | Tiago          | Ana Paula        | fratura perna | 2010-11-12 |
+         | Tiago          | Carlos José      | fratura braco | 2010-11-13 |
+         | Marco Aurelio  | Ana Paula        | traumatismo   | 2010-11-13 |
+         | Marco Aurelio  | Paulo Freitas    | traumatismo   | 2010-11-13 |
+         | Marco Aurelio  | Lucia Ramos      | traumatismo   | 2010-11-14 |
+         | Carlos         | Carlos José      | pneumonia     | 2010-11-14 |
+         | Maria          | Ana Paula        | consulta      | 2010-10-19 |
+         | Pedro          | Lucia Ramos      | enxaqueca     | 2010-11-12 |
+         | Carlos         | Carlos José      | dor no peito  | 2010-11-19 |
+         | Maria          | Carlos José      | fratura braco | 2010-10-20 |
+         | Carlos         | Carlos José      | arritimia     | 2010-10-22 |
+         | Pedro          | Maria José       | enxaqueca     | 2010-11-19 |
+         +----------------+------------------+---------------+------------+
+     */
