@@ -29,8 +29,58 @@
     */
 
 -- 3.  Buscar o nome e a idade (em meses) dos pacientes;
+
+    SELECT `nome`, CONCAT((`idade` * 12), " Meses") AS `idade em meses` FROM `medico`;
+
+    /* O resultado deve ser algo parecido com isso:
+
+        +---------------+----------------+
+        | nome          | idade em meses |
+        +---------------+----------------+
+        | Tiago         | 480 Meses      |
+        | Marco Aurelio | 576 Meses      |
+        | Joao          | 480 Meses      |
+        | Maria         | 504 Meses      |
+        | Pedro         | 612 Meses      |
+        | Carlos        | 336 Meses      |
+        | Marcia        | 396 Meses      |
+        | Renato        | 348 Meses      |
+        +---------------+----------------+
+    */
+
+
 -- 4.  Em quais cidades residem os funcionários?
+
+    SELECT DISTINCT `cidade` FROM `medico`;
+
+    /* O resultado deve ser algo parecido com isso:
+
+        +---------------+
+        | cidade        |
+        +---------------+
+        | Montes Claros |
+        | Janauba       |
+        | Pirapora      |
+        | Ipatinga      |
+        | Cataguaes     |
+        +---------------+
+
+    */
+
+
 -- 5.  Qual o menor e o maior salário dos funcionários residentes em Montes Claros?
+
+    SELECT MAX(`salario`) AS `maior_salario`, MIN(`salario`) AS `menor_salario` FROM `funcionario`;
+
+    /* O resultado deve ser algo parecido com isso:
+
+        +---------------+---------------+
+        | maior_salario | menor_salario |
+        +---------------+---------------+
+        |          5500 |          1200 |
+        +---------------+---------------+
+    */
+
 -- 6.  Qual a média de idade dos médicos e o total de ambulatórios atendidos por eles?
 -- 7.  Buscar o código, o nome e o salário líquido dos funcionários. O salário líquido é obtido pela diferença entre o salário cadastrado menos 20% deste mesmo salário
 -- 8.  Buscar o nome dos funcionários que terminam com a letra “a”;
