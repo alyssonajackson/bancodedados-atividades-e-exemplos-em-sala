@@ -129,12 +129,12 @@
         | Paulo Freitas |    24 |
         | Lucia Ramos   |    30 |
         | Lucia Ramos   |    30 |
-        | Carlos Jos�   |    28 |
-        | Carlos Jos�   |    28 |
-        | Carlos Jos�   |    28 |
-        | Carlos Jos�   |    28 |
-        | Carlos Jos�   |    28 |
-        | Maria Jos�    |    60 |
+        | Carlos José   |    28 |
+        | Carlos José   |    28 |
+        | Carlos José   |    28 |
+        | Carlos José   |    28 |
+        | Carlos José   |    28 |
+        | Maria José    |    60 |
         +---------------+-------+
     */
 
