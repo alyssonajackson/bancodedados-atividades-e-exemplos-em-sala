@@ -116,6 +116,28 @@
 
 
 -- 8. Listar o nome e idade de todos os pacientes que realizaram alguma consulta nos meses de outubro e novembro de 2010, ordenados por idade, do mais novo para o mais velho.
+
+    SELECT `P`.`nome`, `P`.`idade` FROM `paciente` `P` INNER JOIN `consulta` `C` ON `P`.`idPaciente` = `C`.`idPaciente` WHERE `C`.`Data` BETWEEN '2010-10-01' AND '2010-11-30';
+
+    /*
+        +---------------+-------+
+        | nome          | idade |
+        +---------------+-------+
+        | Ana Paula     |    20 |
+        | Ana Paula     |    20 |
+        | Ana Paula     |    20 |
+        | Paulo Freitas |    24 |
+        | Lucia Ramos   |    30 |
+        | Lucia Ramos   |    30 |
+        | Carlos Jos�   |    28 |
+        | Carlos Jos�   |    28 |
+        | Carlos Jos�   |    28 |
+        | Carlos Jos�   |    28 |
+        | Carlos Jos�   |    28 |
+        | Maria Jos�    |    60 |
+        +---------------+-------+
+    */
+
 -- 9. Qual a doença que mais foi diagnosticada durante as consultas? Quais médicos a diagnosticaram?
 -- 10. Listar as especialidades dos médicos que mais atenderam aos pacientes.
 -- 11. Qual ambulatório prestou o maior número de atendimentos?
