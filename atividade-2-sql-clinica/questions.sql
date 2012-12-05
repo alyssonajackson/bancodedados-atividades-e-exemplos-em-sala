@@ -56,3 +56,13 @@
      */
 
 -- 4. Qual o ambulatório que possui a maior quantidade de médicos associados?
+
+    SELECT COUNT(`idMedico`) as `total_medicos`, `idAmbulatorio` FROM `medico` GROUP BY `idAmbulatorio` ORDER BY `total_medicos` DESC LIMIT 1;
+
+    /*
+        +---------------+---------------+
+        | total_medicos | idAmbulatorio |
+        +---------------+---------------+
+        |             3 |             1 |
+        +---------------+---------------+
+    */
