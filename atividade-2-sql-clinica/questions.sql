@@ -1,5 +1,19 @@
 -- 1.Buscar o nome (em ordem alfabética) de todos os pacientes que realizaram alguma consulta.
 
+    SELECT `paciente`.`nome` FROM `consulta` INNER JOIN `paciente` ON `consulta`.`idPaciente` = `paciente`.`idPaciente` GROUP BY `consulta`.`idPaciente`;
+
+    /*
+        +---------------+
+        | nome          |
+        +---------------+
+        | Ana Paula     |
+        | Paulo Freitas |
+        | Lucia Ramos   |
+        | Carlos Jos�   |
+        | Maria Jos�    |
+        +---------------+
+    */
+
 -- 2.Qual o médico que mais atendeu pacientes?
 
     SELECT medico.idMedico, COUNT(idConsulta) FROM medico left join consulta on medico.idMedico = consulta.idMedico GROUP BY consulta.idMedico;
