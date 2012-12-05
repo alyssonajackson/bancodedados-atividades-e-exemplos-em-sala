@@ -139,5 +139,29 @@
     */
 
 -- 9. Qual a doença que mais foi diagnosticada durante as consultas? Quais médicos a diagnosticaram?
+
+    SELECT GROUP_CONCAT(DISTINCT `M`.`nome`) AS `medicos_que_diagnosticaram`, `C`.`Doenca`, COUNT(*) `numero_de_diagnositos_da_doenca` FROM `consulta` `C` INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico` GROUP BY `C`.`Doenca` ORDER BY `C`.`Doenca` DESC;
+
+    /*
+        ****** OBS.: Considerando que a questão pede somente a doença "mais diagnosticada", devemos adicionar um "LIMI 1" ao final da query acima. ******
+        saiba mais sobre o comando "GROUP_CONCAT": http://dev.mysql.com/doc/refman/5.0/en/group-by-functions.html#function_group-concat
+    */
+
+    /*
+        +----------------------------+---------------+---------------------------------+
+        | medicos_que_diagnosticaram | Doenca        | numero_de_diagnositos_da_doenca |
+        +----------------------------+---------------+---------------------------------+
+        | Marco Aurelio              | traumatismo   |                               3 |
+        | Carlos                     | pneumonia     |                               1 |
+        | Tiago                      | fratura perna |                               1 |
+        | Maria,Tiago                | fratura braco |                               2 |
+        | Pedro                      | enxaqueca     |                               2 |
+        | Carlos                     | dor no peito  |                               1 |
+        | Maria                      | consulta      |                               1 |
+        | Carlos                     | arritimia     |                               1 |
+        +----------------------------+---------------+---------------------------------+
+    */
+
+
 -- 10. Listar as especialidades dos médicos que mais atenderam aos pacientes.
 -- 11. Qual ambulatório prestou o maior número de atendimentos?
