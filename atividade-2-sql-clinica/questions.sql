@@ -164,4 +164,33 @@
 
 
 -- 10. Listar as especialidades dos médicos que mais atenderam aos pacientes.
+    
+    SELECT `M`.`especialidade` FROM `medico` `M` INNER JOIN `consulta` `C` ON `M`.`idMedico` = `C`.`idMedico` GROUP BY `C`.`idMedico` ORDER BY COUNT(DISTINCT `C`.`idConsulta`) DESC;
+
+    /* OBS.: Essa query traz as especialidades de TODOS os médicos que atenderam pelo menos uma vez, visto que a questão não especifica "os X médicos que mais atenderam" */
+
+    /*
+        +---------------+
+        | especialidade |
+        +---------------+
+        | Ortopedia     |
+        | Obstetricia   |
+        | Pediatra      |
+        | Ortopedia     |
+        | Traumatologia |
+        +---------------+
+    */
+
 -- 11. Qual ambulatório prestou o maior número de atendimentos?
+
+    SELECT `idAmbulatorio`, COUNT(DISTINCT `C`.`idConsulta`) AS `atendimentos` FROM `consulta` `C` INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico` GROUP BY `M`.`idAmbulatorio` ORDER BY `atendimentos` DESC LIMIT 1;
+
+    /*
+        +---------------+--------------+
+        | idAmbulatorio | atendimentos |
+        +---------------+--------------+
+        |             1 |            5 |
+        |             2 |            4 |
+        |             5 |            3 |
+        +---------------+--------------+
+    */
