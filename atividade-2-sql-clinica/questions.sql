@@ -1,6 +1,9 @@
 -- 1.Buscar o nome (em ordem alfabética) de todos os pacientes que realizaram alguma consulta.
 
-    SELECT `paciente`.`nome` FROM `consulta` INNER JOIN `paciente` ON `consulta`.`idPaciente` = `paciente`.`idPaciente` GROUP BY `consulta`.`idPaciente`;
+    SELECT `paciente`.`nome`
+    FROM `consulta`
+    INNER JOIN `paciente` ON `consulta`.`idPaciente` = `paciente`.`idPaciente`
+    GROUP BY `consulta`.`idPaciente`;
 
     /*
         +---------------+
@@ -16,7 +19,10 @@
 
 -- 2.Qual o médico que mais atendeu pacientes?
 
-    SELECT medico.idMedico, COUNT(idConsulta) FROM medico left join consulta on medico.idMedico = consulta.idMedico GROUP BY consulta.idMedico;
+    SELECT medico.idMedico, COUNT(idConsulta) FROM medico
+    LEFT JOIN consulta ON medico.idMedico = consulta.idMedico
+    GROUP BY consulta.idMedico;
+
     -- OU --
     -- SELECT M.idMedico, COUNT(idConsulta) FROM medico M left join consulta C on M.idMedico = C.idMedico GROUP BY C.idMedico;
 
@@ -57,7 +63,10 @@
 
 -- 4. Qual o ambulatório que possui a maior quantidade de médicos associados?
 
-    SELECT COUNT(`idMedico`) as `total_medicos`, `idAmbulatorio` FROM `medico` GROUP BY `idAmbulatorio` ORDER BY `total_medicos` DESC LIMIT 1;
+    SELECT COUNT(`idMedico`) AS `total_medicos`, `idAmbulatorio`
+    FROM `medico`
+    GROUP BY `idAmbulatorio`
+    ORDER BY `total_medicos` DESC LIMIT 1;
 
     /*
         +---------------+---------------+
@@ -88,7 +97,10 @@
 
 -- 6. Qual o medico mais novo que atendeu algum paciente?
 
-    SELECT `M`.`nome`, `M`.`idade`, `M`.`idMedico` FROM `medico` `M` INNER JOIN `consulta` `C` ON `M`.`idMedico` = `C`.`idMedico` ORDER BY `M`.`idade` ASC LIMIT 1;
+    SELECT `M`.`nome`, `M`.`idade`, `M`.`idMedico`
+    FROM `medico` `M`
+    INNER JOIN `consulta` `C` ON `M`.`idMedico` = `C`.`idMedico`
+    ORDER BY `M`.`idade` ASC LIMIT 1;
 
     /*
         +--------+-------+----------+
@@ -101,7 +113,10 @@
 
 -- 7. Qual o medico que mais atendeu pacientes?
 
-    SELECT `C`.`idMedico`, COUNT(*) AS `total_consultas` FROM `consulta` `C` GROUP BY `C`.`idMedico` ORDER BY `total_consultas` DESC LIMIT 1;
+    SELECT `C`.`idMedico`, COUNT(*) AS `total_consultas`
+    FROM `consulta` `C`
+    GROUP BY `C`.`idMedico`
+    ORDER BY `total_consultas` DESC LIMIT 1;
 
     -- Para obter também o nome do médico (e não simplesmente o ID):
         -- SELECT `M`.`nome`, `C`.`idMedico`, COUNT(*) AS `total_consultas` FROM `consulta` `C` INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico` GROUP BY `C`.`idMedico` ORDER BY `total_consultas` DESC LIMIT 1;
@@ -117,7 +132,10 @@
 
 -- 8. Listar o nome e idade de todos os pacientes que realizaram alguma consulta nos meses de outubro e novembro de 2010, ordenados por idade, do mais novo para o mais velho.
 
-    SELECT `P`.`nome`, `P`.`idade` FROM `paciente` `P` INNER JOIN `consulta` `C` ON `P`.`idPaciente` = `C`.`idPaciente` WHERE `C`.`Data` BETWEEN '2010-10-01' AND '2010-11-30';
+    SELECT `P`.`nome`, `P`.`idade`
+    FROM `paciente` `P`
+    INNER JOIN `consulta` `C` ON `P`.`idPaciente` = `C`.`idPaciente`
+    WHERE `C`.`Data` BETWEEN '2010-10-01' AND '2010-11-30';
 
     /*
         +---------------+-------+
@@ -140,7 +158,11 @@
 
 -- 9. Qual a doença que mais foi diagnosticada durante as consultas? Quais médicos a diagnosticaram?
 
-    SELECT GROUP_CONCAT(DISTINCT `M`.`nome`) AS `medicos_que_diagnosticaram`, `C`.`Doenca`, COUNT(*) `numero_de_diagnositos_da_doenca` FROM `consulta` `C` INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico` GROUP BY `C`.`Doenca` ORDER BY `C`.`Doenca` DESC;
+    SELECT GROUP_CONCAT(DISTINCT `M`.`nome`) AS `medicos_que_diagnosticaram`, `C`.`Doenca`, COUNT(*) `numero_de_diagnositos_da_doenca`
+    FROM `consulta` `C`
+    INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico`
+    GROUP BY `C`.`Doenca`
+    ORDER BY `C`.`Doenca` DESC;
 
     /*
         ****** OBS.: Considerando que a questão pede somente a doença "mais diagnosticada", devemos adicionar um "LIMI 1" ao final da query acima. ******
@@ -165,7 +187,11 @@
 
 -- 10. Listar as especialidades dos médicos que mais atenderam aos pacientes.
     
-    SELECT `M`.`especialidade` FROM `medico` `M` INNER JOIN `consulta` `C` ON `M`.`idMedico` = `C`.`idMedico` GROUP BY `C`.`idMedico` ORDER BY COUNT(DISTINCT `C`.`idConsulta`) DESC;
+    SELECT `M`.`especialidade`
+    FROM `medico` `M`
+    INNER JOIN `consulta` `C` ON `M`.`idMedico` = `C`.`idMedico`
+    GROUP BY `C`.`idMedico`
+    ORDER BY COUNT(DISTINCT `C`.`idConsulta`) DESC;
 
     /* OBS.: Essa query traz as especialidades de TODOS os médicos que atenderam pelo menos uma vez, visto que a questão não especifica "os X médicos que mais atenderam" */
 
@@ -183,7 +209,11 @@
 
 -- 11. Qual ambulatório prestou o maior número de atendimentos?
 
-    SELECT `idAmbulatorio`, COUNT(DISTINCT `C`.`idConsulta`) AS `atendimentos` FROM `consulta` `C` INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico` GROUP BY `M`.`idAmbulatorio` ORDER BY `atendimentos` DESC LIMIT 1;
+    SELECT `idAmbulatorio`, COUNT(DISTINCT `C`.`idConsulta`) AS `atendimentos`
+    FROM `consulta` `C`
+    INNER JOIN `medico` `M` ON `C`.`idMedico` = `M`.`idMedico`
+    GROUP BY `M`.`idAmbulatorio`
+    ORDER BY `atendimentos` DESC LIMIT 1;
 
     /*
         +---------------+--------------+
